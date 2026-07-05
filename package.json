@@ -1,0 +1,65 @@
+{
+  "name": "codeatlas",
+  "displayName": "CodeAtlas",
+  "description": "Static analysis and architecture validator for Spring Boot projects.",
+  "version": "0.1.0",
+  "publisher": "codeatlas",
+  "license": "MIT",
+  "engines": {
+    "vscode": "^1.80.0"
+  },
+  "categories": [
+    "Linters",
+    "Visualization"
+  ],
+  "activationEvents": [],
+  "main": "./dist/extension.js",
+  "contributes": {
+    "commands": [
+      {
+        "command": "codeatlas.analyze",
+        "title": "CodeAtlas: Analyze Project"
+      }
+    ],
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "codeatlas-explorer",
+          "title": "CodeAtlas",
+          "icon": "$(graph-line)"
+        }
+      ]
+    },
+    "views": {
+      "codeatlas-explorer": [
+        {
+          "id": "codeatlasView",
+          "name": "Architecture Health"
+        }
+      ]
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "npm run compile",
+    "compile": "node esbuild.js",
+    "watch": "node esbuild.js --watch",
+    "lint": "eslint src --ext ts",
+    "test": "tsc --noEmit && mocha -r ts-node/register test/unit/**/*.test.ts"
+  },
+  "dependencies": {
+    "java-parser": "^2.3.0"
+  },
+  "devDependencies": {
+    "@types/mocha": "^10.0.1",
+    "@types/node": "18.x",
+    "@types/vscode": "^1.80.0",
+    "@typescript-eslint/eslint-plugin": "^6.4.0",
+    "@typescript-eslint/parser": "^6.4.0",
+    "esbuild": "^0.19.2",
+    "eslint": "^8.47.0",
+    "mocha": "^10.2.0",
+    "prettier": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.1.6"
+  }
+}

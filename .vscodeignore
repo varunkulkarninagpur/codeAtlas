@@ -1,0 +1,13 @@
+.vscode/**
+.vscode-test/**
+src/**
+test/**
+.gitignore
+.eslintrc.json
+.prettierrc
+tsconfig.json
+esbuild.js
+README.md
+LICENSE
+CHANGELOG.md
+node_modules/**
