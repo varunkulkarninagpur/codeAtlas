@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" fill="none">
+  <g
+    stroke="#111111"
+    stroke-width="8"
+    stroke-linecap="butt"
+    stroke-linejoin="miter"
+    vector-effect="non-scaling-stroke"
+    shape-rendering="geometricPrecision"
+  >
+    <path d="M20 96V36L64 10 108 36V96" />
+    <line x1="20" y1="96" x2="32" y2="88" />
+    <line x1="108" y1="96" x2="96" y2="88" />
+
+    <path d="M36 84V48L64 32 92 48V84" />
+    <line x1="36" y1="84" x2="64" y2="68" />
+    <line x1="92" y1="84" x2="64" y2="68" />
+
+    <path d="M52 76V56L64 48 76 56V76L64 84Z" />
+    <line x1="52" y1="56" x2="64" y2="64" />
+    <line x1="76" y1="56" x2="64" y2="64" />
+    <line x1="64" y1="48" x2="64" y2="84" />
+  </g>
+</svg>

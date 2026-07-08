@@ -1,0 +1,30 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "module": "ES2022",
+    "moduleResolution": "node",
+    "outDir": ".test-dist-esm",
+    "rootDir": ".",
+    "noEmit": false,
+    "sourceMap": false
+  },
+  "include": [
+    "src/common/**/*.ts",
+    "src/engine/**/*.ts",
+    "src/parser/**/*.ts",
+    "src/pipeline/**/*.ts",
+    "src/scanner/**/*.ts",
+    "scripts/validate-parser.ts",
+    "test/unit/integration.test.ts",
+    "test/unit/javaParser.test.ts",
+    "test/unit/regression.test.ts",
+    "test/unit/semanticExtractor.test.ts",
+    "test/integration/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "dist",
+    "out",
+    "docs"
+  ]
+}

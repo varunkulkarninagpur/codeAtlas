@@ -3,7 +3,8 @@ const esbuild = require("esbuild");
 const args = process.argv.slice(2);
 const watch = args.includes("--watch");
 
-const buildOptions = {
+// Node.js Extension Bundle
+const extensionOptions = {
   entryPoints: ["./src/extension.ts"],
   bundle: true,
   outfile: "./dist/extension.js",
@@ -15,13 +16,30 @@ const buildOptions = {
   logLevel: "info",
 };
 
+// Webview UI Client Bundle (Browser)
+const explorerOptions = {
+  entryPoints: ["./src/explorer/media/main.ts"],
+  bundle: true,
+  outfile: "./dist/explorer/main.js",
+  format: "iife",
+  platform: "browser",
+  sourcemap: true,
+  minify: !watch,
+  logLevel: "info",
+};
+
 async function main() {
   if (watch) {
-    const ctx = await esbuild.context(buildOptions);
-    await ctx.watch();
+    const extCtx = await esbuild.context(extensionOptions);
+    await extCtx.watch();
+
+    const expCtx = await esbuild.context(explorerOptions);
+    await expCtx.watch();
+
     console.log("Watching for changes...");
   } else {
-    await esbuild.build(buildOptions);
+    await esbuild.build(extensionOptions);
+    await esbuild.build(explorerOptions);
     console.log("Build complete.");
   }
 }
