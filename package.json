@@ -81,8 +81,8 @@
     "compile": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "lint": "eslint src --ext ts",
-    "test:unit": "tsc --noEmit && mocha -r ts-node/register test/unit/*.test.ts",
-    "test:e2e": "tsc --noEmit && mocha -r ts-node/register test/integration/*.test.ts",
+    "test:unit": "tsc --noEmit && node -r ts-node/register ./node_modules/mocha/bin/_mocha \"test/unit/*.test.ts\"",
+    "test:e2e": "tsc --noEmit && node -r ts-node/register ./node_modules/mocha/bin/_mocha \"test/integration/*.test.ts\"",
     "test": "npm run test:unit"
   },
   "dependencies": {
