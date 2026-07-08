@@ -12,7 +12,7 @@ import { UnusedServiceRule } from "../../src/engine/rules/UnusedServiceRule";
 import { JavaClass } from "../../src/common/types";
 
 describe("E2E Integration Verification with spring-demo", () => {
-  const demoPath = path.join(__dirname, "..", "..", "examples", "spring-demo");
+  const demoPath = path.join(process.cwd(), "examples", "spring-demo");
 
   // Helper to recursively find files matching a suffix
   async function findFiles(dir: string, suffix: string): Promise<string[]> {
@@ -106,7 +106,7 @@ describe("E2E Integration Verification with spring-demo", () => {
   });
 
   it("should process enterprise-demo classes and flag exactly 2 bypass, 2 circular, and 3 unused service violations", async () => {
-    const entPath = path.join(__dirname, "..", "..", "examples", "enterprise-demo");
+    const entPath = path.join(process.cwd(), "examples", "enterprise-demo");
     const filePaths = await findFiles(entPath, ".java");
     assert.strictEqual(filePaths.length, 70, "Expected 70 java files in enterprise-demo fixture");
 
@@ -156,7 +156,7 @@ describe("E2E Integration Verification with spring-demo", () => {
   });
 
   it("should pass all parser validation conformance suite assertions", async () => {
-    const { runValidationSuite } = require("../../scripts/validate-parser");
+    const { runValidationSuite } = await import("../../scripts/validate-parser.js");
     const result = await runValidationSuite();
     assert.strictEqual(result.failed, false, `Validation Failed:\n${result.failures.join("\n")}`);
   });

@@ -1,5 +1,6 @@
 import * as fs from "fs";
 import * as path from "path";
+import { fileURLToPath } from "url";
 import { JavaParser } from "../src/parser/JavaParser";
 import { SemanticExtractor } from "../src/parser/SemanticExtractor";
 import { ComponentTypeResolver } from "../src/engine/ComponentTypeResolver";
@@ -9,6 +10,8 @@ import { LayerViolationRule } from "../src/engine/rules/LayerViolationRule";
 import { CircularDependencyRule } from "../src/engine/rules/CircularDependencyRule";
 import { UnusedServiceRule } from "../src/engine/rules/UnusedServiceRule";
 import { JavaClass } from "../src/common/types";
+
+const __filename = fileURLToPath(import.meta.url);
 
 interface Expectations {
   component: string;
@@ -93,7 +96,7 @@ function resolveDependencyFqName(
 }
 
 export async function runValidationSuite() {
-  const fixturesPath = path.resolve(__dirname, "../examples/parser-fixtures");
+  const fixturesPath = path.resolve(process.cwd(), "examples", "parser-fixtures");
   const filePaths = findFiles(fixturesPath, ".java");
 
   const parser = new JavaParser();
@@ -368,7 +371,7 @@ Status: PASS
 `;
 
   // Write report to docs/validation/
-  const reportsDir = path.resolve(__dirname, "../docs/validation");
+  const reportsDir = path.resolve(process.cwd(), "docs", "validation");
   if (!fs.existsSync(reportsDir)) {
     fs.mkdirSync(reportsDir, { recursive: true });
   }
@@ -389,7 +392,9 @@ Status: PASS
   };
 }
 
-if (require.main === module) {
+const isDirectRun = process.argv[1] && path.resolve(process.argv[1]) === __filename;
+
+if (isDirectRun) {
   runValidationSuite().then((res) => {
     if (res.failed) {
       process.exit(1);

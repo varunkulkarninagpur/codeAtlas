@@ -81,8 +81,11 @@
     "compile": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "lint": "eslint src --ext ts",
-    "test:unit": "tsc --noEmit && node -r ts-node/register ./node_modules/mocha/bin/_mocha \"test/unit/*.test.ts\"",
-    "test:e2e": "tsc --noEmit && node -r ts-node/register ./node_modules/mocha/bin/_mocha \"test/integration/*.test.ts\"",
+    "test:unit:cjs": "node -r ts-node/register ./node_modules/mocha/bin/_mocha \"test/unit/architectureEngine.test.ts\" \"test/unit/architectureGraph.test.ts\" \"test/unit/circularDependencyRule.test.ts\" \"test/unit/diagnosticMapper.test.ts\" \"test/unit/unusedServiceRule.test.ts\" \"test/unit/workspaceScanner.test.ts\"",
+    "test:prepare:esm": "rimraf .test-dist-esm && tsc -p tsconfig.tests.esm.json && node -e \"require('fs').writeFileSync('.test-dist-esm/package.json', '{\\\"type\\\":\\\"module\\\"}')\"",
+    "test:unit:esm": "npm run test:prepare:esm && node --experimental-specifier-resolution=node ./node_modules/mocha/bin/mocha \".test-dist-esm/test/unit/integration.test.js\" \".test-dist-esm/test/unit/javaParser.test.js\" \".test-dist-esm/test/unit/regression.test.js\" \".test-dist-esm/test/unit/semanticExtractor.test.js\"",
+    "test:unit": "tsc -p tsconfig.tests.json --noEmit && npm run test:unit:cjs && npm run test:unit:esm",
+    "test:e2e": "npm run test:prepare:esm && node --experimental-specifier-resolution=node ./node_modules/mocha/bin/mocha \".test-dist-esm/test/integration/*.test.js\"",
     "test": "npm run test:unit"
   },
   "dependencies": {

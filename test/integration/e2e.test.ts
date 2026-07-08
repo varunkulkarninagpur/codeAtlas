@@ -24,7 +24,7 @@ describe("E2E Validation Suite (External Repositories)", function () {
   ]);
 
   it("should validate Spring PetClinic if present", async function () {
-    const repoPath = path.resolve(__dirname, "../../examples/spring-petclinic");
+    const repoPath = path.resolve(process.cwd(), "examples", "spring-petclinic");
     if (!fs.existsSync(repoPath)) {
       console.log(`[INFO] Spring PetClinic not found at ${repoPath}. Skipping E2E test.`);
       this.skip();
@@ -53,7 +53,7 @@ describe("E2E Validation Suite (External Repositories)", function () {
   });
 
   it("should validate PiggyMetrics if present", async function () {
-    const repoPath = path.resolve(__dirname, "../../examples/piggymetrics");
+    const repoPath = path.resolve(process.cwd(), "examples", "piggymetrics");
     if (!fs.existsSync(repoPath)) {
       console.log(`[INFO] PiggyMetrics not found at ${repoPath}. Skipping E2E test.`);
       this.skip();
@@ -82,7 +82,7 @@ describe("E2E Validation Suite (External Repositories)", function () {
   });
 
   it("should validate Shopizer if present", async function () {
-    const repoPath = path.resolve(__dirname, "../../examples/shopizer");
+    const repoPath = path.resolve(process.cwd(), "examples", "shopizer");
     if (!fs.existsSync(repoPath)) {
       console.log(`[INFO] Shopizer not found at ${repoPath}. Skipping E2E test.`);
       this.skip();

@@ -1,5 +1,6 @@
 out
 dist
+.test-dist-esm
 node_modules
 .vscode-test
 *.vsix
