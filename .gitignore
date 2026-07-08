@@ -3,3 +3,14 @@ dist
 node_modules
 .vscode-test
 *.vsix
+
+# External validation codebases and archives
+examples/shopizer/
+examples/piggymetrics/
+examples/spring-petclinic/
+examples/spring-boot-realworld-example-app/
+examples/jhipster-sample-app/
+examples/*.zip
+validation-reports/
+scratch/
+scratch_check_exports.js

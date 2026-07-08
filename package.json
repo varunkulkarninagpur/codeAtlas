@@ -2,7 +2,7 @@
   "name": "codeatlas",
   "displayName": "CodeAtlas",
   "description": "Static analysis and architecture validator for Spring Boot projects.",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "publisher": "codeatlas",
   "license": "MIT",
   "engines": {
@@ -12,6 +12,24 @@
     "Linters",
     "Visualization"
   ],
+  "homepage": "https://github.com/varunkulkarninagpur/codeAtlas#readme",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/varunkulkarninagpur/codeAtlas.git"
+  },
+  "bugs": {
+    "url": "https://github.com/varunkulkarninagpur/codeAtlas/issues"
+  },
+  "keywords": [
+    "spring-boot",
+    "java",
+    "architecture",
+    "linter",
+    "static-analysis",
+    "dependency-graph",
+    "architectural-validation"
+  ],
+  "icon": "assets/icon.png",
   "activationEvents": [],
   "main": "./dist/extension.js",
   "contributes": {
@@ -19,6 +37,10 @@
       {
         "command": "codeatlas.analyze",
         "title": "CodeAtlas: Analyze Project"
+      },
+      {
+        "command": "codeatlas.openExplorer",
+        "title": "CodeAtlas: Open Architecture Explorer"
       }
     ],
     "viewsContainers": {
@@ -26,7 +48,7 @@
         {
           "id": "codeatlas-explorer",
           "title": "CodeAtlas",
-          "icon": "$(graph-line)"
+          "icon": "assets/icon.png"
         }
       ]
     },
@@ -37,6 +59,21 @@
           "name": "Architecture Health"
         }
       ]
+    },
+    "configuration": {
+      "title": "CodeAtlas",
+      "properties": {
+        "codeatlas.verboseLogging": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable verbose logging for parsing and performance metrics in the Output Channel."
+        },
+        "codeAtlas.verboseLogging": {
+          "type": "boolean",
+          "default": false,
+          "description": "Enable verbose logging for parsing and performance metrics in the Output Channel."
+        }
+      }
     }
   },
   "scripts": {
@@ -44,12 +81,16 @@
     "compile": "node esbuild.js",
     "watch": "node esbuild.js --watch",
     "lint": "eslint src --ext ts",
-    "test": "tsc --noEmit && mocha -r ts-node/register test/unit/**/*.test.ts"
+    "test:unit": "tsc --noEmit && mocha -r ts-node/register test/unit/*.test.ts",
+    "test:e2e": "tsc --noEmit && mocha -r ts-node/register test/integration/*.test.ts",
+    "test": "npm run test:unit"
   },
   "dependencies": {
+    "cytoscape": "^3.34.0",
     "java-parser": "^2.3.0"
   },
   "devDependencies": {
+    "@types/cytoscape": "^3.21.9",
     "@types/mocha": "^10.0.1",
     "@types/node": "18.x",
     "@types/vscode": "^1.80.0",
